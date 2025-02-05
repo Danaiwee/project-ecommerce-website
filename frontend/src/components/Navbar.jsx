@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart, UserPlus, LogIn, LogOut, Lock } from "lucide-react";
+import { useUserStore } from "../store/useUserStore.js";
 
 const Navbar = () => {
-  const user = true;
-  const admin = false;
+  const {user, logout} = useUserStore(); 
+  const isAdmin = user?.role === 'admin';
 
   return (
     <header className="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg z-40 transition-all duration-300 border-b border-emerald-800">
@@ -34,7 +35,7 @@ const Navbar = () => {
               </Link>
             )}
 
-            {admin && (
+            {isAdmin && (
               <Link
                 to="/secret-dashboard"
                 className="px-3 py-2 text-white bg-emerald-600 hover:bg-emerald-500 rounded-lg gap-2 flex items-center"
@@ -45,21 +46,30 @@ const Navbar = () => {
             )}
 
             {user ? (
-              <button className="flex items-center bg-gray-700 hover:bg-gray-600 transition-all duration-300 text-white px-3 py-2 rounded-lg gap-2 cursor-pointer">
+              <button 
+                className="flex items-center bg-gray-700 hover:bg-gray-600 transition-all duration-300 text-white px-3 py-2 rounded-lg gap-2 cursor-pointer"
+                onClick={logout}
+              >
                 <LogOut className="size-5 " />
                 <span className="hidden sm:block text-sm">Logout</span>
               </button>
             ) : (
               <>
-                <button className="flex items-center bg-gray-700 hover:bg-gray-600 transition-all duration-300 text-white px-3 py-2 rounded-lg gap-2 cursor-pointer">
+                <Link 
+                  to='/signup'
+                  className="flex items-center bg-gray-700 hover:bg-gray-600 transition-all duration-300 text-white px-3 py-2 rounded-lg gap-2 cursor-pointer"
+                >
                   <UserPlus className="size-5 " />
                   <span className="hidden sm:block text-sm">Signup</span>
-                </button>
+                </Link>
 
-                <button className="flex items-center bg-gray-700 hover:bg-gray-600 transition-all duration-300 text-white px-3 py-2 rounded-lg gap-2 cursor-pointer">
+                <Link 
+                  to='/login'
+                  className="flex items-center bg-gray-700 hover:bg-gray-600 transition-all duration-300 text-white px-3 py-2 rounded-lg gap-2 cursor-pointer"
+                >
                   <LogIn className="size-5 " />
                   <span className="hidden sm:block text-sm">Login</span>
-                </button>
+                </Link>
               </>
             )}
           </div>
