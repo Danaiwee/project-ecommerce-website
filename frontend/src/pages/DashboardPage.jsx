@@ -1,13 +1,22 @@
 import {motion} from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { DASHBOARD_TABS } from '../constants/data.js';
 import CreateProductForm from '../components/CreateProductForm.jsx';
 import ProductLists from '../components/ProductLists.jsx';
 import AnalyticsTab from '../components/AnalyticsTab.jsx';
+import { useProductStore } from '../store/useProductStore.js';
 
 const DashboardPage = () => {
   const [activeTab, setActiveTab] = useState('create');
+
+  const {fetchAllProducts, products} = useProductStore();
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, [fetchAllProducts]);
+
+  console.log(products);
   
   return (
     <main className='w-full h-full mx-auto py-12'>
@@ -46,7 +55,7 @@ const DashboardPage = () => {
                 transition={{duration: 1}}
             >
                 {activeTab === 'create' && <CreateProductForm />}
-                {activeTab === 'products' && <ProductLists />}
+                {activeTab === 'products' && <ProductLists products={products} />}
                 {activeTab === 'analytics' && <AnalyticsTab />}
             </motion.div>
         </div>

@@ -18,3 +18,5 @@ export const DASHBOARD_TABS = [
 ];
 
 export const PRODUCT_CATEGORIES = ["jeans", "t-shirts", "shoes", "glasses", "jackets", "suits", "bags"];
+
+export const PRODUCT_TABLE_HEADERS = ["product", "price", "category", "featured", "actions"];
