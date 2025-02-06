@@ -9,9 +9,11 @@ import LoadingSpinner from "./components/LoadingSpinner";
 
 import Navbar from './components/Navbar';
 import { useUserStore } from "./store/useUserStore.js";
+import DashboardPage from "./pages/DashboardPage.jsx";
 
 const App = () => {
   const {user, checkAuth, isCheckingAuth} = useUserStore();
+  const isAdmin = user?.role === 'admin';
 
   useEffect(() => {
     checkAuth();
@@ -38,6 +40,7 @@ const App = () => {
           <Route path="/" element={user ? <HomePage /> : <Navigate to='/login' />} />
           <Route path="/signup" element={!user ? <SignupPage /> : <Navigate to='/' />} />
           <Route path="/login" element={!user ? <LoginPage /> : <Navigate to='/' />} />
+          <Route path='/secret-dashboard' element={isAdmin ? <DashboardPage /> : <Navigate to='/login' />} />
         </Routes>
         <Toaster />
       </div>
