@@ -52,13 +52,14 @@ export const createProduct = async(req, res) => {
     const imageResponse = await cloudinary.uploader.upload(image, {folder: "ecom-products"});
     const imageUrl = imageResponse.secure_url;
 
-    const newProduct = await Product.create({
+    const newProduct =  new Product({
         name,
         description,
         price,
         image: imageUrl || '',
         category
     });
+    newProduct.save();
 
     return res.status(200).json(newProduct);
 

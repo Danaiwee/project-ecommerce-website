@@ -15,7 +15,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
-app.use(express.json()); // For using req
+app.use(express.json({limit: "5mb"})); // For using req
 app.use(cookieParser()); // For sending cookies between route
 
 app.use("/api/auth", authRoutes);
