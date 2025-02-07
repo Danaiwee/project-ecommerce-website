@@ -5,17 +5,20 @@ import axios from '../lib/axios.js';
 
 export const useCartStore = create((set, get) => ({
     cart: [],
+    loading: false,
     coupon: null,
     total: 0,
     subtotal: 0,
     isCouponApplied: false,
 
     getCartItem: async () => {
+        set({loading: true});
         try {
             const res = await axios.get("/cart");
 
-            set({cart: res.data});
+            set({cart: res.data, loading:false});
         } catch (error) {
+            set({loading: false});
             console.log("Error in getCartItem useCartStore: ", error.message);
             throw new Error(error.message);
         }
