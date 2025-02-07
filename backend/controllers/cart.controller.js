@@ -92,3 +92,18 @@ export const updateQuantity = async(req, res) => {
         res.status(500).json({message: error.message});
     }
 };
+
+export const clearCart = async (req, res) => {
+    try {
+        const user = req.user;
+
+        user.cartItems = [];
+        user.save();
+
+        return res.status(200).json(user.cartItems);
+
+    } catch (error) {
+        console.log("Error in clearCart controller: ", error.message);
+        throw new Error(error.message);
+    }
+};
