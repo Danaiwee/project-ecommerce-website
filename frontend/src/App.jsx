@@ -12,6 +12,7 @@ import { useUserStore } from "./store/useUserStore.js";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import CategoryPage from "./pages/CategoryPage.jsx";
 import { useCartStore } from "./store/useCartStore.js";
+import CartPage from "./pages/CartPage.jsx";
 
 const App = () => {
   const {user, checkAuth, isCheckingAuth} = useUserStore();
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/login" element={!user ? <LoginPage /> : <Navigate to='/' />} />
           <Route path='/secret-dashboard' element={isAdmin ? <DashboardPage /> : <Navigate to='/login' />} />
           <Route path='category/:category' element={user ? <CategoryPage /> : <Navigate to='/login' />} />
+          <Route path='/cart' element={user ? <CartPage /> : <Navigate to='/login' />} />
         </Routes>
         <Toaster />
       </div>

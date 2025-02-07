@@ -26,7 +26,9 @@ const ProductCard = ({product}) => {
 
   
   return (
-    <div className='w-full max-w-70 p-3 bg-transparent border border-gray-700 rounded-md flex flex-col mt-2 py-5'>
+    <div 
+      className='w-full max-w-70 p-3 bg-transparent border border-gray-700 rounded-md flex flex-col mt-2 py-5'
+    >
         <img 
             src={product.image}
             className='w-full h-50 overflow-hidden object-fill rounded-md'

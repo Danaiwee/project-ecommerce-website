@@ -19,8 +19,6 @@ export const useCartStore = create((set, get) => ({
             console.log("Error in getCartItem useCartStore: ", error.message);
             throw new Error(error.message);
         }
-
-        
     },
 
     addToCart: async (product) => {
@@ -41,6 +39,41 @@ export const useCartStore = create((set, get) => ({
             get().calculateTotals();
         } catch (error) {
             console.log("Error in addToCart useCartStore: ", error.message);
+            throw new Error(error.message);
+        }
+    },
+
+    removeFromCart: async (productId) => {
+        try {
+            await axios.delete("/cart", {data: productId});
+
+            set((state) => ({
+                cart: state.cart.filter((item) => item._id !== productId)
+            }));
+
+            get().calculateTotals();
+            toast.success("Removed item successfully")
+        } catch (error) {
+            console.log("Error in removeFromCart: ", error.message);
+            throw new Error(error.message);
+        }
+    },
+
+    updateQuantity: async (productId, quantity) => {
+        try {
+            if(quantity === 0){
+                get().removeFromCart(productId);
+                return;
+            };
+
+            await axios.put(`/cart/${productId}`, {quantity});
+            set((state) => ({
+                cart: state.cart.map((item) => item._id === productId ? {...item, quantity} : item)
+            }));
+
+            get().calculateTotals();
+        } catch (error) {
+            console.log("Error in updateQuantity: ", error.message);
             throw new Error(error.message);
         }
     },

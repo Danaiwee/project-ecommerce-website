@@ -95,4 +95,16 @@ export const useProductStore = create((set, get) => ({
             throw new Error(error);
         }
     },
+
+    fetchRecommendedProducts: async () => {
+        set({loading: true})
+        try {
+            const res = await axios.get('/products/recommendations');
+
+            set({products: res.data, loading: false})
+        } catch (error) {
+            console.log("Error in fetchRecommended products: ", error.message);
+            throw new Error(error.message);
+        }
+    },
 }))
