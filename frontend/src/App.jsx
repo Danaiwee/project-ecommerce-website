@@ -13,6 +13,7 @@ import DashboardPage from "./pages/DashboardPage.jsx";
 import CategoryPage from "./pages/CategoryPage.jsx";
 import { useCartStore } from "./store/useCartStore.js";
 import CartPage from "./pages/CartPage.jsx";
+import SuccessPage from "./pages/SuccessPage.jsx";
 
 const App = () => {
   const {user, checkAuth, isCheckingAuth} = useUserStore();
@@ -49,6 +50,7 @@ const App = () => {
           <Route path='/secret-dashboard' element={isAdmin ? <DashboardPage /> : <Navigate to='/login' />} />
           <Route path='category/:category' element={user ? <CategoryPage /> : <Navigate to='/login' />} />
           <Route path='/cart' element={user ? <CartPage /> : <Navigate to='/login' />} />
+          <Route path='/payment-success' element={user ? <SuccessPage /> : <LoginPage />} />
         </Routes>
         <Toaster />
       </div>
