@@ -42,7 +42,7 @@ const App = () => {
           <Route path="/signup" element={!user ? <SignupPage /> : <Navigate to='/' />} />
           <Route path="/login" element={!user ? <LoginPage /> : <Navigate to='/' />} />
           <Route path='/secret-dashboard' element={isAdmin ? <DashboardPage /> : <Navigate to='/login' />} />
-          <Route path='category/:category' element={<CategoryPage />} />
+          <Route path='category/:category' element={user ? <CategoryPage /> : <Navigate to='/login' />} />
         </Routes>
         <Toaster />
       </div>

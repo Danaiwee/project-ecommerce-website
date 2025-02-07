@@ -1,6 +1,30 @@
 import { ShoppingCart } from 'lucide-react'
+import toast from 'react-hot-toast';
+
+import { useCartStore } from '../store/useCartStore.js'
+import {useUserStore} from '../store/useUserStore.js';
+import { useEffect } from 'react';
 
 const ProductCard = ({product}) => {
+  const {user} = useUserStore();
+  const {addToCart, cart} = useCartStore();
+  
+  const handleAddToCart = () => {
+    if(!user){
+        toast.error("Please login", {id: 'login'});
+
+    } else{
+        //add to cart
+        addToCart(product);
+    }
+  };
+
+  useEffect(() => {
+    console.log("ProductCart: ", cart);
+    
+  }, [cart])
+
+  
   return (
     <div className='w-full max-w-70 p-3 bg-transparent border border-gray-700 rounded-md flex flex-col mt-2 py-5'>
         <img 
@@ -16,12 +40,13 @@ const ProductCard = ({product}) => {
                 ${product.price}
             </p>
 
-            <buton
+            <button
              className='w-fit bg-emerald-600 hover:bg-emerald-500 rounded-md text-white text-sm flex items-center py-2 px-3 gap-3 cursor-pointer mt-3'
+             onClick={handleAddToCart}
             >
                 <ShoppingCart className='size-4' />
                 <span>Add to cart</span>
-            </buton>
+            </button>
         </div>
     </div>
   )

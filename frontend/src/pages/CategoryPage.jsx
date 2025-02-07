@@ -7,9 +7,10 @@ import ProductCard from "../components/ProductCard";
 
 const CategoryPage = () => {
   const { products, fetchProductsByCategory } = useProductStore();
-
   const { category } = useParams();
-  const header = category.slice(0,1).toUpperCase() + category.slice(1)
+  const header = category.slice(0,1).toUpperCase() + category.slice(1);
+
+  
 
   useEffect(() => {
     fetchProductsByCategory(category);
