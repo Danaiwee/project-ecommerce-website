@@ -81,6 +81,17 @@ export const useCartStore = create((set, get) => ({
         }
     },
 
+    clearCart: async() => {
+        try {
+            const res = await axios.delete("/cart/clear");
+            set({cart: res.data});
+        } catch (error) {
+            console.log("Error in clearCart: ", error.message);
+            throw new Error(error.message);
+        }
+
+    },
+
     calculateTotals: () => {
         const {cart, coupon} = get();
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
