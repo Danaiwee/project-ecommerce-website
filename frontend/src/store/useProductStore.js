@@ -84,4 +84,15 @@ export const useProductStore = create((set, get) => ({
             throw new Error(error.message);
         }
     },
+
+    fetchProductsByCategory: async(category) => {
+        set({loading: true});
+        try {
+            const res = await axios.get(`/products/category/${category}`);
+            set({products: res.data.products, loading: false});
+        } catch (error) {
+            console.log("Error in fetchProductsByCategory: ", error.message);
+            throw new Error(error);
+        }
+    },
 }))

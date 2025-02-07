@@ -10,6 +10,7 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import Navbar from './components/Navbar';
 import { useUserStore } from "./store/useUserStore.js";
 import DashboardPage from "./pages/DashboardPage.jsx";
+import CategoryPage from "./pages/CategoryPage.jsx";
 
 const App = () => {
   const {user, checkAuth, isCheckingAuth} = useUserStore();
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/signup" element={!user ? <SignupPage /> : <Navigate to='/' />} />
           <Route path="/login" element={!user ? <LoginPage /> : <Navigate to='/' />} />
           <Route path='/secret-dashboard' element={isAdmin ? <DashboardPage /> : <Navigate to='/login' />} />
+          <Route path='category/:category' element={<CategoryPage />} />
         </Routes>
         <Toaster />
       </div>
