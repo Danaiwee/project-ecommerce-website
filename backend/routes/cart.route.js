@@ -6,7 +6,7 @@ import { deleteProduct } from '../controllers/product.controller.js';
 const router = express.Router();
 
 router.get("/", protectRoute, getCartProducts);
-router.put("/", protectRoute, addToCart );
+router.post("/", protectRoute, addToCart );
 router.put("/:id", protectRoute, updateQuantity);
 router.delete("/", protectRoute, deleteProduct);
 

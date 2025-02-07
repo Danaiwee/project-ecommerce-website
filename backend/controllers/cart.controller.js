@@ -33,14 +33,15 @@ export const addToCart = async(req, res) => {
             existingItem.quantity += 1
 
         } else {
-            user.cartItem.push(productId);
+            user.cartItems.push(productId);
         }
         await user.save();
 
         return res.status(200).json(user.cartItems);
         
     } catch (error) {
-        
+        console.log("Error in addToCart cart contoller: ", error.message);
+        throw new Error(error.message);
     }
 };
 
