@@ -10,6 +10,19 @@ export const useCartStore = create((set, get) => ({
     subtotal: 0,
     isCouponApplied: false,
 
+    getCartItem: async () => {
+        try {
+            const res = await axios.get("/cart");
+
+            set({cart: res.data});
+        } catch (error) {
+            console.log("Error in getCartItem useCartStore: ", error.message);
+            throw new Error(error.message);
+        }
+
+        
+    },
+
     addToCart: async (product) => {
         try {
             await axios.post("/cart", {productId: product._id});

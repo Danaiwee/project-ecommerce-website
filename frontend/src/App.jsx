@@ -11,14 +11,18 @@ import Navbar from './components/Navbar';
 import { useUserStore } from "./store/useUserStore.js";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import CategoryPage from "./pages/CategoryPage.jsx";
+import { useCartStore } from "./store/useCartStore.js";
 
 const App = () => {
   const {user, checkAuth, isCheckingAuth} = useUserStore();
   const isAdmin = user?.role === 'admin';
 
+  const {getCartItem} = useCartStore();
+
   useEffect(() => {
     checkAuth();
-  }, [checkAuth])
+    getCartItem();
+  }, [checkAuth, getCartItem]);
 
   if(isCheckingAuth){
     return (
