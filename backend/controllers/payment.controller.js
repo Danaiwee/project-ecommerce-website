@@ -143,3 +143,30 @@ async function createNewCoupon(userId){
 
     return newCoupon;
 }
+
+//modified
+export const createOrder = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const {products, totalAmount} = req.body;
+
+        const order = new Order({
+            user: userId,
+            products: products.map((product) => ({
+                product: product._id,
+                quantity: product.quantity,
+                price: product.price
+            })),
+            totalAmount,
+            stripeSessionId: Math.floor(Math.random() * 100000000000).toString()
+        });
+
+        await order.save();
+
+        return res.status(200).json(order);
+
+    } catch (error) {
+        console.log("Error in createOrder: ", error.message);
+        throw new Error(error.message);
+    }
+};
