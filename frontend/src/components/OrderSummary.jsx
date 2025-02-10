@@ -1,13 +1,16 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-
-import { useCartStore } from "../store/useCartStore.js";
 import { useEffect } from "react";
 
+import { useCartStore } from "../store/useCartStore.js";
+import { usePaymentStore } from "../store/usePaymentStore.js";
+
 const OrderSummary = ({ total, subtotal, coupon, isCouponApplied }) => {
-  const { clearCart, createCoupon, deleteCoupon, destroyCoupon, getCoupon } =
+  const { clearCart, createCoupon, deleteCoupon, destroyCoupon, cart } =
     useCartStore();
+
+  const {createOrder} = usePaymentStore();
 
   const originalPrice = subtotal.toFixed(2);
   const totalPrice = total.toFixed(2);
@@ -18,11 +21,13 @@ const OrderSummary = ({ total, subtotal, coupon, isCouponApplied }) => {
 
   useEffect(() => {
     console.log("orderSummary: ", coupon);
-    
-  }, [coupon])
+
+    console.log("Cart Items: ",cart);  
+  }, [coupon, cart]);
 
   const handlePayment = async () => {
     if (total > 200) {
+      await createOrder(cart, total);
       await clearCart();
       await createCoupon();
       
@@ -33,6 +38,7 @@ const OrderSummary = ({ total, subtotal, coupon, isCouponApplied }) => {
       
 
     }else {
+      await createOrder(cart, total);
       await clearCart();
       
       if(coupon){
@@ -40,7 +46,6 @@ const OrderSummary = ({ total, subtotal, coupon, isCouponApplied }) => {
         await destroyCoupon(coupon.code);
       }
     }
-
   };
 
   return (

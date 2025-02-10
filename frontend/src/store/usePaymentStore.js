@@ -1,6 +1,6 @@
 import {create} from 'zustand';
 
-import axios from 'axios';
+import axios from '../lib/axios.js';
 import { stripePromise } from '../lib/stripe.js';
 
 export const usePaymentStore = create(() => ({
@@ -25,6 +25,18 @@ export const usePaymentStore = create(() => ({
         } catch (error) {
             console.log("Error in createCheckoutSession: ", error.message);
             throw new Error(error.message)
+        }
+    },
+
+    createOrder: async (cart, total) => {
+        try {
+            await axios.post("/payments/create", {
+                products: cart,
+                totalAmount: total
+            });
+        } catch (error) {
+            console.log("Error in createOrder: ", error.message);
+            throw new Error(error.message);
         }
     },
 }))
