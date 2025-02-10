@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { useEffect } from "react";
 
 import { useCartStore } from "../store/useCartStore.js";
 import { usePaymentStore } from "../store/usePaymentStore.js";
@@ -18,12 +17,6 @@ const OrderSummary = ({ total, subtotal, coupon, isCouponApplied }) => {
     ? (originalPrice * coupon.discountPercentage) / 100
     : 0;
   const totalDisCount = discount.toFixed(2);
-
-  useEffect(() => {
-    console.log("orderSummary: ", coupon);
-
-    console.log("Cart Items: ",cart);  
-  }, [coupon, cart]);
 
   const handlePayment = async () => {
     if (total > 200) {
