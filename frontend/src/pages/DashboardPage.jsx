@@ -16,8 +16,6 @@ const DashboardPage = () => {
     fetchAllProducts();
   }, [fetchAllProducts]);
 
-  console.log(products);
-
   return (
     <main className="w-full h-full mx-auto py-12">
       <div className="w-full container px-5 flex flex-col items-center mx-auto">
