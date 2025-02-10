@@ -19,12 +19,6 @@ const ProductCard = ({product}) => {
     }
   };
 
-  useEffect(() => {
-    console.log("ProductCart: ", cart);
-    
-  }, [cart])
-
-  
   return (
     <div 
       className='w-full max-w-70 p-3 bg-transparent border border-gray-700 rounded-md flex flex-col mt-2 py-5'

@@ -16,7 +16,6 @@ const CategoryPage = () => {
     fetchProductsByCategory(category);
   }, [fetchProductsByCategory, category]);
 
-  console.log("Category products: ", products);
   return (
     <main className='w-full h-full mx-auto py-12'>
         <div className='w-full max-w-7xl flex flex-col items-center mx-auto'>

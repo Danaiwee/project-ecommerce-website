@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 import { useCartStore } from "../store/useCartStore.js";
+import { useEffect } from "react";
 
 const OrderSummary = ({ total, subtotal, coupon, isCouponApplied }) => {
-  const { clearCart } = useCartStore();
+  const { clearCart, createCoupon, deleteCoupon, destroyCoupon, getCoupon } =
+    useCartStore();
 
   const originalPrice = subtotal.toFixed(2);
   const totalPrice = total.toFixed(2);
@@ -14,8 +16,31 @@ const OrderSummary = ({ total, subtotal, coupon, isCouponApplied }) => {
     : 0;
   const totalDisCount = discount.toFixed(2);
 
+  useEffect(() => {
+    console.log("orderSummary: ", coupon);
+    
+  }, [coupon])
+
   const handlePayment = async () => {
-    await clearCart();
+    if (total > 200) {
+      await clearCart();
+      await createCoupon();
+      
+      if(coupon){
+        await deleteCoupon();
+        await destroyCoupon(coupon.code);
+      }
+      
+
+    }else {
+      await clearCart();
+      
+      if(coupon){
+        await deleteCoupon();
+        await destroyCoupon(coupon.code);
+      }
+    }
+
   };
 
   return (

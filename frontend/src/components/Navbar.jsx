@@ -9,9 +9,6 @@ const Navbar = () => {
 
   const { cart } = useCartStore();
 
-  console.log("Navbar: ", cart);
-  
-
   return (
     <header className="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg z-100 transition-all duration-300 border-b border-emerald-800">
       <div className="relative container mx-auto px-4 py-4">
