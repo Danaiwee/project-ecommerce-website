@@ -31,7 +31,7 @@ const ProductLists = ({products}) => {
           {products.map((item, index) => (
             <tr key={index}>
               <td className="flex items-center gap-3 py-4">
-                <img src={item.image} className="size-10 rounded-full" />
+                <img src={item.image} className="hidden sm:block size-10 rounded-full" />
                 <p className="text-gray-100 text-md font-medium">{item.name}</p>
               </td>
 
