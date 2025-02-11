@@ -86,7 +86,6 @@ This project is a **full-stack e-commerce platform** built using the **MERN stac
 - ![Framer Motion](https://img.shields.io/badge/-Framer%20Motion-FF4154?logo=framer&logoColor=white&style=flat) **Framer Motion**  
 - ![React Router](https://img.shields.io/badge/-React%20Router-DCDCDC?logo=reactrouter&logoColor=black&style=flat) **React Router DOM**  
 - ![Recharts](https://img.shields.io/badge/-Recharts-3182CE?logo=recharts&logoColor=white&style=flat) **Recharts**  
-- ![Stripe](https://img.shields.io/badge/-Stripe-008CDD?logo=stripe&logoColor=white&style=flat) **Stripe API**  
 - ![Cloudinary](https://img.shields.io/badge/-Cloudinary-F2B94A?logo=cloudinary&logoColor=black&style=flat) **Cloudinary**  
 
 ---
