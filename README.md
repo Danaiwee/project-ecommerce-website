@@ -1,5 +1,6 @@
 
-![e-commerce_page-0001](https://github.com/user-attachments/assets/7ac7c2dd-eef4-4d71-ad2f-e4705cef5dcf)
+![411961379-7ac7c2dd-eef4-4d71-ad2f-e4705cef5dcf](https://github.com/user-attachments/assets/2c23a0b9-c103-4feb-a647-859fb6908ba2)
+
 
 # **E-Commerce Website (MERN Stack)**  
 
